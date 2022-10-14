@@ -42,7 +42,7 @@ const CustomForm = ({ FormList, apiUrl }) => {
       setInputs((pre) => {
         return {
           ...pre,
-          [e.taget.name]: e.taget.files[0],
+          [e.target.name]: e.target.files[0],
         };
       });
     }

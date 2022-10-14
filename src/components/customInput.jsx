@@ -107,6 +107,7 @@ const CustomInput = ({
           Upload file
         </label>
         <input
+          name={name}
           onChange={handleFileChange}
           className="block w-full text-sm text-gray-900 bg-gray-50 rounded py-2 px-3 border border-gray-300 cursor-pointer  focus:outline-none "
           type="file"

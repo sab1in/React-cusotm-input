@@ -52,12 +52,12 @@ const inputFields = [
       { label: "Female", value: "female" },
     ],
   },
-  // {
-  //   name: "file",
-  //   label: "profile",
-  //   defaultValue: "",
-  //   type: "file",
-  // },
+  {
+    name: "file",
+    label: "profile",
+    defaultValue: "",
+    type: "file",
+  },
   {
     name: "range",
     type: "range",
