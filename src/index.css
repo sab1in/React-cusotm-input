@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* used to style the active links */
+/* nav a.active {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 5px;
+    color: orange;
+    font-weight: bold;
+} */
