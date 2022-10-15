@@ -1,3 +1,5 @@
+import { ImageValidator, DocValidator } from "./fileValidator";
+
 const FormValidation = (data, inputs) => {
   const errors = {};
   inputs.forEach((element, index) => {
@@ -23,22 +25,30 @@ const FormValidation = (data, inputs) => {
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gi
         )
       ) {
-        errors[name] = "Invalid password";
+        errors[name] =
+          "Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one symbol";
       }
     }
-    if (
-      type === "text" ||
-      type === "range" ||
-      type === "select" ||
-      type === "date"
-    ) {
-      let a = data[name];
-      if (element?.require && (a?.trim() === "" || !a)) {
+
+    if (type === "file") {
+      if (element?.require && !data[name]) {
+        errors[name] = "This field is require";
+      } else if (element?.fileType === "image") {
+        !ImageValidator(data[name]) &&
+          (errors[name] = "Invalid file, please uplaod image");
+      } else if (element?.fileType === "document") {
+        !DocValidator(data[name]) &&
+          (errors[name] = "Invalid file, please uplaod document");
+      }
+    }
+    if (type === "text" && type === "select") {
+      if (element?.require && (data[name]?.trim() === "" || !data[name])) {
         errors[name] = "This field is require";
       }
-    }
-    if (type === "file" && element?.require && !data[name]) {
-      errors[name] = "This field is require";
+    } else if (type !== "checkbox" && type !== "range") {
+      if (element?.require && !data[name]) {
+        errors[name] = "This field is require";
+      }
     }
   });
   return errors;

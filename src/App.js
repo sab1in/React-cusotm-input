@@ -8,7 +8,6 @@ const inputFields = [
     type: "text",
     label: "First name",
     placeholder: "Enter your first name",
-    defaultValue: "",
     require: true,
   },
   {
@@ -16,7 +15,6 @@ const inputFields = [
     type: "text",
     label: "Last name",
     placeholder: "Enter your last name",
-    defaultValue: "",
     require: true,
   },
   {
@@ -24,7 +22,6 @@ const inputFields = [
     type: "email",
     label: "Email",
     placeholder: "Enter your email",
-    defaultValue: "",
     require: true,
   },
   {
@@ -32,46 +29,47 @@ const inputFields = [
     type: "password",
     label: "Password",
     placeholder: "Enter your password",
-    defaultValue: "",
     require: true,
   },
 
   {
     name: "dob",
     type: "date",
-    defaultValue: "",
     label: "DOB",
+    require: true,
   },
   {
     name: "gender",
     type: "select",
     label: "Gender",
-    defaultValue: "female",
+    placeholder: "Select gender",
     options: [
       { label: "Male", value: "male" },
       { label: "Female", value: "female" },
     ],
+    require: true,
   },
   {
     name: "file",
     label: "profile",
-    defaultValue: "",
     type: "file",
+    require: true,
+    fileType: "document",
   },
   {
     name: "range",
     type: "range",
     min: "1",
     step: "1",
-    defaultValue: 15,
     max: "20",
     label: "range",
+    require: true,
   },
   {
     name: "is_admin",
     type: "checkbox",
     label: "Is admin",
-    defaultValue: false,
+    require: true,
   },
 ];
 
@@ -84,8 +82,8 @@ const App = () => {
     dob: "",
     file: "",
     gender: "",
-    is_admin: "",
-    range: "",
+    is_admin: true,
+    range: 15,
   });
   return (
     <React.Fragment>

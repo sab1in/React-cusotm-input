@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
+import FormValidation from "../utils/validation/formValidation";
 import { Input, FileInput, Select, Range, Checkbox } from "./customInput";
 
 const CustomForm = ({ FormList, data, setData }) => {
+  const [errors, setErrors] = useState({});
+
   const onChange = (e) => {
     const { type, value, name } = e.target;
     let temVal;
@@ -23,9 +26,20 @@ const CustomForm = ({ FormList, data, setData }) => {
     });
   };
 
+  const handleError = () => {
+    const err = FormValidation(data, FormList);
+    if (err) {
+      setErrors(err);
+    }
+    return err;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
+    const isValid = handleError();
+    if (typeof isValid === "object" && Object.keys(isValid).length === 0) {
+      console.log(data);
+    }
   };
 
   return (
@@ -37,8 +51,8 @@ const CustomForm = ({ FormList, data, setData }) => {
         <RenderFromInputs
           FormList={FormList}
           data={data}
-          setData={setData}
           onChange={onChange}
+          errors={errors}
         />
       </div>
 
@@ -52,7 +66,7 @@ const CustomForm = ({ FormList, data, setData }) => {
   );
 };
 
-const RenderFromInputs = ({ FormList, data, setData, onChange }) => {
+const RenderFromInputs = ({ FormList, data, onChange, errors }) => {
   return FormList.map((item, index) => {
     const { type, name } = item;
 
@@ -61,6 +75,7 @@ const RenderFromInputs = ({ FormList, data, setData, onChange }) => {
         <FileInput
           key={index}
           {...item}
+          error={errors[name]}
           value={data[name]}
           onChange={onChange}
         />
@@ -70,21 +85,40 @@ const RenderFromInputs = ({ FormList, data, setData, onChange }) => {
         <Checkbox
           key={index}
           {...item}
+          error={errors[name]}
           value={data[name]}
           onChange={onChange}
         />
       );
     } else if (type === "range") {
       return (
-        <Range key={index} {...item} value={data[name]} onChange={onChange} />
+        <Range
+          key={index}
+          {...item}
+          error={errors[name]}
+          value={data[name]}
+          onChange={onChange}
+        />
       );
     } else if (type === "select") {
       return (
-        <Select key={index} {...item} value={data[name]} onChange={onChange} />
+        <Select
+          key={index}
+          {...item}
+          error={errors[name]}
+          value={data[name]}
+          onChange={onChange}
+        />
       );
     } else {
       return (
-        <Input key={index} {...item} value={data[name]} onChange={onChange} />
+        <Input
+          key={index}
+          {...item}
+          error={errors[name]}
+          value={data[name]}
+          onChange={onChange}
+        />
       );
     }
   });
