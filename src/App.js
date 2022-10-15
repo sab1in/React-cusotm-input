@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import CustomForm from "./components/customForm";
 
@@ -76,10 +76,21 @@ const inputFields = [
 ];
 
 const App = () => {
+  const [data, setData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    dob: "",
+    file: "",
+    gender: "",
+    is_admin: "",
+    range: "",
+  });
   return (
     <React.Fragment>
       <div className="min-h-[100vh] flex items-center">
-        <CustomForm FormList={inputFields} apiUrl={""} />
+        <CustomForm FormList={inputFields} data={data} setData={setData} />
       </div>
     </React.Fragment>
   );
