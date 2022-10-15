@@ -1,9 +1,28 @@
 import React from "react";
 
 import { Input, FileInput, Select, Range, Checkbox } from "./customInput";
-import FormValidation from "../utils/validation/formValidation";
 
 const CustomForm = ({ FormList, data, setData }) => {
+  const onChange = (e) => {
+    const { type, value, name } = e.target;
+    let temVal;
+    if (type === "file") {
+      if (e?.target?.files[0]) {
+        temVal = e?.target?.files[0];
+      }
+    } else if (type === "select" || type === "checkbox") {
+      temVal = e?.target?.checked;
+    } else {
+      temVal = value;
+    }
+    setData((pre) => {
+      return {
+        ...pre,
+        [name]: temVal,
+      };
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(data);
@@ -15,7 +34,12 @@ const CustomForm = ({ FormList, data, setData }) => {
       onSubmit={handleSubmit}
     >
       <div className="grid gap-0 md:gap-6   md:grid-cols-2">
-        <RenderFromInputs FormList={FormList} data={data} setData={setData} />
+        <RenderFromInputs
+          FormList={FormList}
+          data={data}
+          setData={setData}
+          onChange={onChange}
+        />
       </div>
 
       <button
@@ -28,66 +52,39 @@ const CustomForm = ({ FormList, data, setData }) => {
   );
 };
 
-const RenderFromInputs = ({ FormList, data, setData }) => {
+const RenderFromInputs = ({ FormList, data, setData, onChange }) => {
   return FormList.map((item, index) => {
-    const { type, name, label } = item;
+    const { type, name } = item;
 
     if (type === "file") {
       return (
         <FileInput
           key={index}
-          name={name}
+          {...item}
           value={data[name]}
-          label={label}
-          setData={setData}
+          onChange={onChange}
         />
       );
     } else if (type === "checkbox") {
       return (
         <Checkbox
           key={index}
-          name={name}
+          {...item}
           value={data[name]}
-          label={label}
-          setData={setData}
+          onChange={onChange}
         />
       );
     } else if (type === "range") {
       return (
-        <Range
-          key={index}
-          name={name}
-          value={data[name]}
-          label={label}
-          setData={setData}
-          min={item.min}
-          max={item.max}
-          step={item.step}
-        />
+        <Range key={index} {...item} value={data[name]} onChange={onChange} />
       );
     } else if (type === "select") {
       return (
-        <Select
-          key={index}
-          name={name}
-          value={data[name]}
-          label={label}
-          setData={setData}
-          placeholder={item.placeholder}
-          options={item.options}
-        />
+        <Select key={index} {...item} value={data[name]} onChange={onChange} />
       );
     } else {
       return (
-        <Input
-          key={index}
-          name={name}
-          type={type}
-          value={data[name]}
-          label={label}
-          setData={setData}
-          placeholder={item.placeholder}
-        />
+        <Input key={index} {...item} value={data[name]} onChange={onChange} />
       );
     }
   });

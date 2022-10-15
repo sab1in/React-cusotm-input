@@ -1,26 +1,6 @@
 import React from "react";
 
-const onChange = (e, setData) => {
-  const { type, value, name } = e.target;
-  let temVal;
-  if (type === "file") {
-    if (e?.target?.files[0]) {
-      temVal = e?.target?.files[0];
-    }
-  } else if (type === "select" || type === "checkbox") {
-    temVal = e?.target?.checked;
-  } else {
-    temVal = value;
-  }
-  setData((pre) => {
-    return {
-      ...pre,
-      [name]: temVal,
-    };
-  });
-};
-
-export const Input = ({ label, name, type, value, setData, placeholder }) => {
+export const Input = ({ label, name, type, value, placeholder, onChange }) => {
   return (
     <div className="w-full mb-2 mx-auto">
       <label
@@ -39,7 +19,7 @@ export const Input = ({ label, name, type, value, setData, placeholder }) => {
         type={type}
         value={value}
         // required={required}
-        onChange={(e) => onChange(e, setData)}
+        onChange={(e) => onChange(e)}
         placeholder={placeholder}
       />
       {/* {error && (
@@ -49,7 +29,7 @@ export const Input = ({ label, name, type, value, setData, placeholder }) => {
   );
 };
 
-export const FileInput = ({ name, setData }) => {
+export const FileInput = ({ name, onChange }) => {
   return (
     <div>
       <label className="block mb-2 text-sm font-medium text-gray-900 ">
@@ -57,7 +37,7 @@ export const FileInput = ({ name, setData }) => {
       </label>
       <input
         name={name}
-        onChange={(e) => onChange(e, setData)}
+        onChange={(e) => onChange(e)}
         className="block w-full text-sm text-gray-900 bg-gray-50 rounded py-1 px-3 border border-gray-300 cursor-pointer  focus:outline-none "
         type="file"
       />
@@ -65,14 +45,14 @@ export const FileInput = ({ name, setData }) => {
   );
 };
 
-export const Checkbox = ({ name, setData, label, value }) => {
+export const Checkbox = ({ name, label, value, onChange }) => {
   return (
     <div className="flex mb-2 items-center">
       <input
         checked={value}
         type="checkbox"
         name={name}
-        onChange={(e) => onChange(e, setData)}
+        onChange={(e) => onChange(e)}
         className="w-4 h-4 text-blue-600 focus:outline-none cursor-pointer bg-gray-100 rounded border-gray-300 "
       />
       <label className="ml-2 text-sm font-medium text-gray-900">{label}</label>
@@ -80,7 +60,7 @@ export const Checkbox = ({ name, setData, label, value }) => {
   );
 };
 
-export const Select = ({ name, setData, label, value, options }) => {
+export const Select = ({ name, label, value, options, onChange }) => {
   return (
     <div className="w-full mb-2 mx-auto">
       <label className="custom-label block mb-2 text-sm font-medium text-gray-900">
@@ -89,7 +69,7 @@ export const Select = ({ name, setData, label, value, options }) => {
       <select
         name={name}
         // required={required}
-        onChange={(e) => onChange(e, setData)}
+        onChange={(e) => onChange(e)}
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
       >
         {options?.map((item, index) => {
@@ -104,7 +84,7 @@ export const Select = ({ name, setData, label, value, options }) => {
   );
 };
 
-export const Range = ({ name, setData, value, min, max, step, label }) => {
+export const Range = ({ name, value, min, max, step, label, onChange }) => {
   return (
     <div className="w-full mb-2 mx-auto">
       <label
@@ -120,7 +100,7 @@ export const Range = ({ name, setData, value, min, max, step, label }) => {
         min={min}
         max={max}
         step={step}
-        onChange={(e) => onChange(e, setData)}
+        onChange={(e) => onChange(e)}
         className="w-full text-blue-600 focus:outline-none cursor-pointer bg-gray-100 rounded border-gray-300 "
       />
     </div>
