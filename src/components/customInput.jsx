@@ -1,7 +1,7 @@
 import React from "react";
 import OnChangeValidation from "../utils/validation/OnChangeValidation";
 
-const onChange = (e, setData, setErrors, fileType) => {
+const onChange = (e, setInput, fileType) => {
   const { type, value, name } = e.target;
   let temVal;
   if (type === "file") {
@@ -13,13 +13,7 @@ const onChange = (e, setData, setErrors, fileType) => {
   } else {
     temVal = value;
   }
-  setData((pre) => {
-    return {
-      ...pre,
-      [name]: temVal,
-    };
-  });
-  setErrors(OnChangeValidation(value, e?.target, fileType));
+  setInput(name, temVal, OnChangeValidation(value, e?.target, fileType));
 };
 
 export const Input = ({
@@ -28,8 +22,7 @@ export const Input = ({
   type,
   value,
   placeholder,
-  setData,
-  setErrors,
+  setInput,
   error,
 }) => {
   return (
@@ -50,7 +43,7 @@ export const Input = ({
         type={type}
         value={value}
         // required={required}
-        onChange={(e) => onChange(e, setData, setErrors)}
+        onChange={(e) => onChange(e, setInput)}
         placeholder={placeholder}
       />
       {error && (
@@ -60,7 +53,7 @@ export const Input = ({
   );
 };
 
-export const FileInput = ({ name, setData, setErrors, fileType, error }) => {
+export const FileInput = ({ name, setInput, fileType, error }) => {
   return (
     <div>
       <label className="block mb-2 text-sm font-medium text-gray-900 ">
@@ -68,7 +61,7 @@ export const FileInput = ({ name, setData, setErrors, fileType, error }) => {
       </label>
       <input
         name={name}
-        onChange={(e) => onChange(e, setData, setErrors, fileType)}
+        onChange={(e) => onChange(e, setInput, fileType)}
         className="block w-full text-sm text-gray-900 bg-gray-50 rounded py-1 px-3 border border-gray-300 cursor-pointer  focus:outline-none "
         type="file"
       />
@@ -79,14 +72,14 @@ export const FileInput = ({ name, setData, setErrors, fileType, error }) => {
   );
 };
 
-export const Checkbox = ({ name, label, value, setData, setErrors, error }) => {
+export const Checkbox = ({ name, label, value, setInput, error }) => {
   return (
     <div className="flex mb-2 items-center">
       <input
         checked={value}
         type="checkbox"
         name={name}
-        onChange={(e) => onChange(e, setData, setErrors)}
+        onChange={(e) => onChange(e, setInput)}
         className="w-4 h-4 text-blue-600 focus:outline-none cursor-pointer bg-gray-100 rounded border-gray-300 "
       />
       <label className="ml-2 text-sm font-medium text-gray-900">{label}</label>
@@ -102,8 +95,7 @@ export const Select = ({
   label,
   placeholder,
   options,
-  setData,
-  setErrors,
+  setInput,
   error,
 }) => {
   return (
@@ -114,7 +106,7 @@ export const Select = ({
       <select
         name={name}
         // required={required}
-        onChange={(e) => onChange(e, setData, setErrors)}
+        onChange={(e) => onChange(e, setInput)}
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
       >
         <option hidden value="">
@@ -142,8 +134,7 @@ export const Range = ({
   max,
   step,
   label,
-  setData,
-  setErrors,
+  setInput,
   error,
 }) => {
   return (
@@ -161,7 +152,7 @@ export const Range = ({
         min={min}
         max={max}
         step={step}
-        onChange={(e) => onChange(e, setData, setErrors)}
+        onChange={(e) => onChange(e, setInput)}
         className="w-full text-blue-600 focus:outline-none cursor-pointer bg-gray-100 rounded border-gray-300 "
       />
       {error && (
