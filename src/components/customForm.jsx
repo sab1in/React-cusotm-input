@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import FormValidation from "../utils/validation/formValidation";
 import { Input, FileInput, Select, Range, Checkbox } from "./customInput";
 
-const CustomForm = ({ FormList, data, setData }) => {
+const CustomForm = ({ FormList }) => {
+  let inputinitialState = {};
+  for (let i = 0; i < FormList.length; i++) {
+    inputinitialState[FormList[i].name] = "";
+  }
+  const [data, setData] = useState(inputinitialState);
+
   const [errors, setErrors] = useState({});
 
   const handleError = () => {
@@ -13,7 +19,6 @@ const CustomForm = ({ FormList, data, setData }) => {
     }
     return err;
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const isValid = handleError();

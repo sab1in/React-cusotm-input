@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import OnChangeValidation from "../utils/validation/OnChangeValidation";
 
 const onChange = (e, setData, setErrors, fileType) => {
@@ -32,10 +32,6 @@ export const Input = ({
   setErrors,
   error,
 }) => {
-  const [inputError, setInputError] = useState(error);
-  useEffect(() => {
-    setInputError(error);
-  }, [error]);
   return (
     <div className="w-full mb-2 mx-auto">
       <label
@@ -54,21 +50,17 @@ export const Input = ({
         type={type}
         value={value}
         // required={required}
-        onChange={(e) => onChange(e, setData, setInputError)}
+        onChange={(e) => onChange(e, setData, setErrors)}
         placeholder={placeholder}
       />
-      {inputError && (
-        <p className="custom-error mt-1 text-sm text-red-600">{inputError}</p>
+      {error && (
+        <p className="custom-error mt-1 text-sm text-red-600">{error}</p>
       )}
     </div>
   );
 };
 
 export const FileInput = ({ name, setData, setErrors, fileType, error }) => {
-  const [inputError, setInputError] = useState(error);
-  useEffect(() => {
-    setInputError(error);
-  }, [error]);
   return (
     <div>
       <label className="block mb-2 text-sm font-medium text-gray-900 ">
@@ -80,18 +72,14 @@ export const FileInput = ({ name, setData, setErrors, fileType, error }) => {
         className="block w-full text-sm text-gray-900 bg-gray-50 rounded py-1 px-3 border border-gray-300 cursor-pointer  focus:outline-none "
         type="file"
       />
-      {inputError && (
-        <p className="custom-error mt-1 text-sm text-red-600">{inputError}</p>
+      {error && (
+        <p className="custom-error mt-1 text-sm text-red-600">{error}</p>
       )}
     </div>
   );
 };
 
 export const Checkbox = ({ name, label, value, setData, setErrors, error }) => {
-  const [inputError, setInputError] = useState(error);
-  useEffect(() => {
-    setInputError(error);
-  }, [error]);
   return (
     <div className="flex mb-2 items-center">
       <input
@@ -102,8 +90,8 @@ export const Checkbox = ({ name, label, value, setData, setErrors, error }) => {
         className="w-4 h-4 text-blue-600 focus:outline-none cursor-pointer bg-gray-100 rounded border-gray-300 "
       />
       <label className="ml-2 text-sm font-medium text-gray-900">{label}</label>
-      {inputError && (
-        <p className="custom-error mt-1 text-sm text-red-600">{inputError}</p>
+      {error && (
+        <p className="custom-error mt-1 text-sm text-red-600">{error}</p>
       )}
     </div>
   );
@@ -113,16 +101,11 @@ export const Select = ({
   name,
   label,
   placeholder,
-  value,
   options,
   setData,
   setErrors,
   error,
 }) => {
-  const [inputError, setInputError] = useState(error);
-  useEffect(() => {
-    setInputError(error);
-  }, [error]);
   return (
     <div className="w-full mb-2 mx-auto">
       <label className="custom-label block mb-2 text-sm font-medium text-gray-900">
@@ -145,8 +128,8 @@ export const Select = ({
           );
         })}
       </select>
-      {inputError && (
-        <p className="custom-error mt-1 text-sm text-red-600">{inputError}</p>
+      {error && (
+        <p className="custom-error mt-1 text-sm text-red-600">{error}</p>
       )}
     </div>
   );
@@ -163,10 +146,6 @@ export const Range = ({
   setErrors,
   error,
 }) => {
-  const [inputError, setInputError] = useState(error);
-  useEffect(() => {
-    setInputError(error);
-  }, [error]);
   return (
     <div className="w-full mb-2 mx-auto">
       <label
@@ -185,8 +164,8 @@ export const Range = ({
         onChange={(e) => onChange(e, setData, setErrors)}
         className="w-full text-blue-600 focus:outline-none cursor-pointer bg-gray-100 rounded border-gray-300 "
       />
-      {inputError && (
-        <p className="custom-error mt-1 text-sm text-red-600">{inputError}</p>
+      {error && (
+        <p className="custom-error mt-1 text-sm text-red-600">{error}</p>
       )}
     </div>
   );
