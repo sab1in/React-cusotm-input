@@ -87,7 +87,7 @@ const App = () => {
   });
   return (
     <React.Fragment>
-      <div className="min-h-[100vh] flex items-center">
+      <div className="min-h-[100vh] bg-gray-300 flex items-center">
         <CustomForm FormList={inputFields} data={data} setData={setData} />
       </div>
     </React.Fragment>

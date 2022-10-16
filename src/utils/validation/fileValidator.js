@@ -6,6 +6,6 @@ export const ImageValidator = (file) => {
 
 export const DocValidator = (file) => {
   const validExtensions = ["doc", "docx", "odt", "pdf"];
-  const fileExtension = file.type.split("/")[1];
+  const fileExtension = file?.type?.split("/")[1];
   return validExtensions.includes(fileExtension);
 };

@@ -6,26 +6,6 @@ import { Input, FileInput, Select, Range, Checkbox } from "./customInput";
 const CustomForm = ({ FormList, data, setData }) => {
   const [errors, setErrors] = useState({});
 
-  const onChange = (e) => {
-    const { type, value, name } = e.target;
-    let temVal;
-    if (type === "file") {
-      if (e?.target?.files[0]) {
-        temVal = e?.target?.files[0];
-      }
-    } else if (type === "select" || type === "checkbox") {
-      temVal = e?.target?.checked;
-    } else {
-      temVal = value;
-    }
-    setData((pre) => {
-      return {
-        ...pre,
-        [name]: temVal,
-      };
-    });
-  };
-
   const handleError = () => {
     const err = FormValidation(data, FormList);
     if (err) {
@@ -51,7 +31,8 @@ const CustomForm = ({ FormList, data, setData }) => {
         <RenderFromInputs
           FormList={FormList}
           data={data}
-          onChange={onChange}
+          setData={setData}
+          setErrors={setErrors}
           errors={errors}
         />
       </div>
@@ -66,7 +47,7 @@ const CustomForm = ({ FormList, data, setData }) => {
   );
 };
 
-const RenderFromInputs = ({ FormList, data, onChange, errors }) => {
+const RenderFromInputs = ({ FormList, data, setData, setErrors, errors }) => {
   return FormList.map((item, index) => {
     const { type, name } = item;
 
@@ -77,7 +58,8 @@ const RenderFromInputs = ({ FormList, data, onChange, errors }) => {
           {...item}
           error={errors[name]}
           value={data[name]}
-          onChange={onChange}
+          setData={setData}
+          setErrors={setErrors}
         />
       );
     } else if (type === "checkbox") {
@@ -87,7 +69,8 @@ const RenderFromInputs = ({ FormList, data, onChange, errors }) => {
           {...item}
           error={errors[name]}
           value={data[name]}
-          onChange={onChange}
+          setData={setData}
+          setErrors={setErrors}
         />
       );
     } else if (type === "range") {
@@ -97,7 +80,8 @@ const RenderFromInputs = ({ FormList, data, onChange, errors }) => {
           {...item}
           error={errors[name]}
           value={data[name]}
-          onChange={onChange}
+          setData={setData}
+          setErrors={setErrors}
         />
       );
     } else if (type === "select") {
@@ -107,7 +91,8 @@ const RenderFromInputs = ({ FormList, data, onChange, errors }) => {
           {...item}
           error={errors[name]}
           value={data[name]}
-          onChange={onChange}
+          setData={setData}
+          setErrors={setErrors}
         />
       );
     } else {
@@ -117,7 +102,8 @@ const RenderFromInputs = ({ FormList, data, onChange, errors }) => {
           {...item}
           error={errors[name]}
           value={data[name]}
-          onChange={onChange}
+          setData={setData}
+          setErrors={setErrors}
         />
       );
     }
