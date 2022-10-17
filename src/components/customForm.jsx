@@ -5,7 +5,7 @@ import { Input, FileInput, Select, Range, Checkbox } from "./customInput";
 
 const CustomForm = ({ FormList, data, setData }) => {
   const [errors, setErrors] = useState({});
-
+  console.log(errors);
   const setInput = (key, value, error) => {
     setData((pre) => {
       return {
@@ -64,7 +64,7 @@ const RenderFromInputs = ({ FormList, data, setInput, errors }) => {
         <FileInput
           key={index}
           {...item}
-          error={errors[name]}
+          error={errors}
           value={data[name]}
           setInput={setInput}
         />
@@ -74,7 +74,7 @@ const RenderFromInputs = ({ FormList, data, setInput, errors }) => {
         <Checkbox
           key={index}
           {...item}
-          error={errors[name]}
+          error={errors}
           value={data[name]}
           setInput={setInput}
         />
@@ -84,7 +84,7 @@ const RenderFromInputs = ({ FormList, data, setInput, errors }) => {
         <Range
           key={index}
           {...item}
-          error={errors[name]}
+          error={errors}
           value={data[name]}
           setInput={setInput}
         />
@@ -94,7 +94,7 @@ const RenderFromInputs = ({ FormList, data, setInput, errors }) => {
         <Select
           key={index}
           {...item}
-          error={errors[name]}
+          error={errors}
           value={data[name]}
           setInput={setInput}
         />
@@ -104,7 +104,7 @@ const RenderFromInputs = ({ FormList, data, setInput, errors }) => {
         <Input
           key={index}
           {...item}
-          error={errors[name]}
+          error={errors}
           value={data[name]}
           setInput={setInput}
         />

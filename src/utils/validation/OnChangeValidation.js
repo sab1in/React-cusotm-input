@@ -1,9 +1,9 @@
 import { DocValidator, ImageValidator } from "./fileValidator";
 
-const OnChangeValidation = (data, element, fileType) => {
-  let errors = {};
+const OnChangeValidation = (data, element, error, require, fileType) => {
+  let errors = error || {};
   const { type, files, name } = element;
-
+  console.log("hi", error, data);
   if (type === "email") {
     let a = data;
     if (a?.trim() === "" || !a) {
@@ -14,7 +14,7 @@ const OnChangeValidation = (data, element, fileType) => {
       )
     ) {
       errors[name] = "Invalid email address";
-    }
+    } else delete errors[name];
   }
   if (type === "password") {
     let a = data;
@@ -27,26 +27,28 @@ const OnChangeValidation = (data, element, fileType) => {
     ) {
       errors[name] =
         "Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one symbol";
-    }
+    } else delete errors[name];
   }
 
   if (type === "file") {
-    if (element?.require && files[0]) {
+    if (require && !files[0]) {
       errors[name] = "This field is require";
     } else if (fileType === "image") {
-      !ImageValidator(files[0]) &&
-        (errors[name] = "Invalid file, please uplaod image");
+      !ImageValidator(files[0])
+        ? (errors[name] = "Invalid file, please uplaod image")
+        : delete errors[name];
     } else if (fileType === "document") {
-      !DocValidator(files[0]) &&
-        (errors[name] = "Invalid file, please uplaod documment");
-    }
+      !DocValidator(files[0])
+        ? (errors[name] = "Invalid file, please uplaod documment")
+        : delete errors[name];
+    } else delete errors[name];
   }
   if (type === "text" && type === "select") {
-    if (element?.require && (data?.trim() === "" || !data)) {
+    if (require && (data?.trim() === "" || !data)) {
       errors[name] = "This field is require";
-    }
+    } else delete errors[name];
   } else if (type !== "checkbox" && type !== "range") {
-    if (element?.require && !data) {
+    if (require && !data) {
       errors[name] = "This field is require";
     }
   }
