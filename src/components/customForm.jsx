@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Input, FileInput, Select, Range, Checkbox } from "./customInput";
 
 const CustomForm = ({ FormList, data, setData }) => {
   const [errors, setErrors] = useState({});
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   const setInput = (key, value, error) => {
     setData((pre) => {
@@ -30,7 +26,6 @@ const CustomForm = ({ FormList, data, setData }) => {
       requireSize = element.require ? requireSize + 1 : requireSize;
     });
     const errorSize = Object.keys(error).length;
-    console.log(requireSize, errorSize, data, "me");
     return (
       Object.values(error).every((x) => x === false) &&
       requireSize === errorSize
