@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, FileInput, Select, Range, Checkbox } from "./customInput";
 
 const CustomForm = ({ FormList, data, setData }) => {
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
 
   const setInput = (key, value, error) => {
     setData((pre) => {
@@ -11,12 +15,22 @@ const CustomForm = ({ FormList, data, setData }) => {
         [key]: value,
       };
     });
-    setErrors(error);
+    error !== null &&
+      setErrors((pre) => {
+        return {
+          ...pre,
+          [key]: error,
+        };
+      });
   };
 
-  const errorValidity = (error, data) => {
-    let requireSize = Object.keys(data).length;
+  const errorValidity = (error, FormList) => {
+    let requireSize = 0;
+    FormList.forEach((element) => {
+      requireSize = element.require ? requireSize + 1 : requireSize;
+    });
     const errorSize = Object.keys(error).length;
+    console.log(requireSize, errorSize, data, "me");
     return (
       Object.values(error).every((x) => x === false) &&
       requireSize === errorSize
@@ -25,7 +39,7 @@ const CustomForm = ({ FormList, data, setData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (errorValidity(errors, data)) {
+    if (errorValidity(errors, FormList)) {
       console.log(data);
     } else alert("Enter your details");
   };
@@ -63,7 +77,7 @@ const RenderFromInputs = ({ FormList, data, setInput, errors }) => {
         <FileInput
           key={index}
           {...item}
-          error={errors}
+          error={errors[name]}
           value={data[name]}
           setInput={setInput}
         />
@@ -73,7 +87,7 @@ const RenderFromInputs = ({ FormList, data, setInput, errors }) => {
         <Checkbox
           key={index}
           {...item}
-          error={errors}
+          error={errors[name]}
           value={data[name]}
           setInput={setInput}
         />
@@ -83,7 +97,7 @@ const RenderFromInputs = ({ FormList, data, setInput, errors }) => {
         <Range
           key={index}
           {...item}
-          error={errors}
+          error={errors[name]}
           value={data[name]}
           setInput={setInput}
         />
@@ -93,7 +107,7 @@ const RenderFromInputs = ({ FormList, data, setInput, errors }) => {
         <Select
           key={index}
           {...item}
-          error={errors}
+          error={errors[name]}
           value={data[name]}
           setInput={setInput}
         />
@@ -103,7 +117,7 @@ const RenderFromInputs = ({ FormList, data, setInput, errors }) => {
         <Input
           key={index}
           {...item}
-          error={errors}
+          error={errors[name]}
           value={data[name]}
           setInput={setInput}
         />

@@ -95,7 +95,7 @@ const App = () => {
     file: "",
     gender: "",
     is_admin: true,
-    range: 15,
+    range: 0,
   });
 
   // for single Input
