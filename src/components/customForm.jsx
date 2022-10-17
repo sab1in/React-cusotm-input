@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, FileInput, Select, Range, Checkbox } from "./customInput";
+import { Checkbox, Input, Range, Select, FileInput } from "./customInput";
 
 const CustomForm = ({ FormList, data, setData }) => {
   const [errors, setErrors] = useState({});
@@ -20,22 +20,10 @@ const CustomForm = ({ FormList, data, setData }) => {
   };
 
   const errorValidity = (error, FormList) => {
-    let requireSize = 0;
-    let errorSize = 0;
+    const required = FormList.filter((e) => e.require).map((e) => e.name);
+    const has_fields = required.every((e) => e in errors);
 
-    FormList.forEach((element) => {
-      requireSize = element.require ? requireSize + 1 : requireSize;
-    });
-    Object.keys(error).forEach((item) => {
-      FormList.forEach((element) => {
-        element.name === item && element.require && errorSize++;
-      });
-    });
-
-    return (
-      Object.values(error).every((x) => x === false) &&
-      requireSize === errorSize
-    );
+    return has_fields && Object.values(error).every((x) => x === false);
   };
 
   const handleSubmit = (e) => {
@@ -70,60 +58,36 @@ const CustomForm = ({ FormList, data, setData }) => {
 };
 
 const RenderFromInputs = ({ FormList, data, setInput, errors }) => {
+  const Type = (type) => {
+    return type === "file"
+      ? "FileInput"
+      : type === "checkbox"
+      ? "Checkbox"
+      : type === "select"
+      ? "Select"
+      : type === "range"
+      ? "Range"
+      : "Input";
+  };
   return FormList.map((item, index) => {
-    const { type, name } = item;
-
-    if (type === "file") {
-      return (
-        <FileInput
-          key={index}
-          {...item}
-          error={errors[name]}
-          value={data[name]}
-          setInput={setInput}
-        />
-      );
-    } else if (type === "checkbox") {
-      return (
-        <Checkbox
-          key={index}
-          {...item}
-          error={errors[name]}
-          value={data[name]}
-          setInput={setInput}
-        />
-      );
-    } else if (type === "range") {
-      return (
-        <Range
-          key={index}
-          {...item}
-          error={errors[name]}
-          value={data[name]}
-          setInput={setInput}
-        />
-      );
-    } else if (type === "select") {
-      return (
-        <Select
-          key={index}
-          {...item}
-          error={errors[name]}
-          value={data[name]}
-          setInput={setInput}
-        />
-      );
-    } else {
-      return (
-        <Input
-          key={index}
-          {...item}
-          error={errors[name]}
-          value={data[name]}
-          setInput={setInput}
-        />
-      );
-    }
+    const { name } = item;
+    const InputNames = {
+      Input,
+      Checkbox,
+      Select,
+      Range,
+      FileInput,
+    };
+    var FindInput = InputNames[Type(item.type)];
+    return (
+      <FindInput
+        key={index}
+        {...item}
+        error={errors[name]}
+        value={data[name]}
+        setInput={setInput}
+      />
+    );
   });
 };
 

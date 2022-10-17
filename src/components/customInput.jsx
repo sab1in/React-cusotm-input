@@ -36,7 +36,7 @@ export const Input = ({
   require,
 }) => {
   return (
-    <div className="w-full mb-2 mx-auto">
+    <div className="w-full mb-2">
       <label
         htmlFor={name}
         className={` block mb-2 text-sm font-medium text-gray-900`}
@@ -46,7 +46,7 @@ export const Input = ({
       <input
         id={name}
         className={
-          "py-2 px-4 bg-gray-50 border border-gray-300 transition duration-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          "py-2 px-4 bg-gray-50 border border-gray-300 self-start transition duration-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         }
         // required
         name={name}
@@ -66,6 +66,7 @@ export const Input = ({
 };
 
 export const FileInput = ({
+  label,
   name,
   setInput,
   fileType,
@@ -76,7 +77,7 @@ export const FileInput = ({
   return (
     <div>
       <label className="block mb-2 text-sm font-medium text-gray-900 ">
-        Upload file
+        {label}
       </label>
       <input
         name={name}
@@ -105,13 +106,16 @@ export const Checkbox = ({
   return (
     <div className="flex mb-2 items-center">
       <input
+        id={name}
         checked={value}
         type="checkbox"
         name={name}
         onChange={(e) => onChange(e, setInput, type, require)}
-        className="w-4 h-4 text-blue-600 focus:outline-none cursor-pointer bg-gray-100 rounded border-gray-300 "
+        className="w-4 h-4 text-blue-600 focus:outline-none cursor-pointer float-left bg-gray-100 rounded border-gray-300 "
       />
-      <label className="ml-2 text-sm font-medium text-gray-900">{label}</label>
+      <label htmlFor={name} className="ml-2 text-sm font-medium text-gray-900">
+        {label}
+      </label>
       {error && (
         <p className="custom-error mt-1 text-sm text-red-600">
           {error === true && "invalid data"}
@@ -133,7 +137,7 @@ export const Select = ({
   type,
 }) => {
   return (
-    <div className="w-full mb-2 mx-auto">
+    <div className="w-full mb-2">
       <label className="custom-label block mb-2 text-sm font-medium text-gray-900">
         {label}
       </label>
@@ -177,7 +181,7 @@ export const Range = ({
   type,
 }) => {
   return (
-    <div className="w-full mb-2 mx-auto">
+    <div className="w-full mb-2 ">
       <label
         htmlFor="checked-checkbox"
         className="ml-2 text-sm font-medium text-gray-900"
