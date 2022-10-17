@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import { Input, FileInput, Select, Range, Checkbox } from "./customInput";
 
 const CustomForm = ({ FormList, data, setData }) => {
-  const initialError = {};
-  FormList.forEach((element) => {
-    const { name, require } = element;
-    initialError[name] = require && "not valid";
-  });
-  const [errors, setErrors] = useState(initialError);
+  const [errors, setErrors] = useState({});
 
   const setInput = (key, value, error) => {
     setData((pre) => {
@@ -19,13 +14,18 @@ const CustomForm = ({ FormList, data, setData }) => {
     setErrors(error);
   };
 
-  const errorValidity = (error) => {
-    return Object.values(error).every((x) => x === false);
+  const errorValidity = (error, data) => {
+    let requireSize = Object.keys(data).length;
+    const errorSize = Object.keys(error).length;
+    return (
+      Object.values(error).every((x) => x === false) &&
+      requireSize === errorSize
+    );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (errorValidity(errors)) {
+    if (errorValidity(errors, data)) {
       console.log(data);
     } else alert("Enter your details");
   };
