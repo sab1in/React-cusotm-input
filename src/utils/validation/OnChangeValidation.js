@@ -4,6 +4,9 @@ const OnChangeValidation = (data, element, error, require, fileType) => {
   let errors = error || {};
   const { type, files, name } = element;
   console.log("hi", error, data);
+  if (data) {
+    delete errors[name];
+  }
   if (type === "email") {
     let a = data;
     if (a?.trim() === "" || !a) {
@@ -46,7 +49,7 @@ const OnChangeValidation = (data, element, error, require, fileType) => {
   if (type === "text" && type === "select") {
     if (require && (data?.trim() === "" || !data)) {
       errors[name] = "This field is require";
-    } else delete errors[name];
+    }
   } else if (type !== "checkbox" && type !== "range") {
     if (require && !data) {
       errors[name] = "This field is require";
