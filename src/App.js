@@ -77,7 +77,7 @@ const inputFields = [
 
 // for single Input
 const single_Input = {
-  name: "email",
+  name: "user_email",
   type: "email",
   label: "Email",
   placeholder: "Enter your email",
@@ -99,18 +99,11 @@ const App = () => {
   });
 
   // for single Input
-  const [singleInput, setsingleInput] = useState({
-    email: "",
-  });
+  const [singleInput, setsingleInput] = useState("");
   const [singleInputError, setsingleInputError] = useState({});
 
   const setInput = (key, value, error) => {
-    setsingleInput((pre) => {
-      return {
-        ...pre,
-        [key]: value,
-      };
-    });
+    setsingleInput(value);
     setsingleInputError(error);
   };
 
