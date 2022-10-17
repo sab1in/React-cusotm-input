@@ -8,9 +8,6 @@ const OnChangeValidation = (data, type, require, fileType) => {
     }
     errors = false;
   }
-  if (!require) {
-    errors = null;
-  }
   if (type === "email") {
     let a = data;
     if (a?.trim() === "" || !a) {

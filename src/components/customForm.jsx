@@ -11,21 +11,27 @@ const CustomForm = ({ FormList, data, setData }) => {
         [key]: value,
       };
     });
-    error !== null &&
-      setErrors((pre) => {
-        return {
-          ...pre,
-          [key]: error,
-        };
-      });
+    setErrors((pre) => {
+      return {
+        ...pre,
+        [key]: error,
+      };
+    });
   };
 
   const errorValidity = (error, FormList) => {
     let requireSize = 0;
+    let errorSize = 0;
+
     FormList.forEach((element) => {
       requireSize = element.require ? requireSize + 1 : requireSize;
     });
-    const errorSize = Object.keys(error).length;
+    Object.keys(error).forEach((item) => {
+      FormList.forEach((element) => {
+        element.name === item && element.require && errorSize++;
+      });
+    });
+
     return (
       Object.values(error).every((x) => x === false) &&
       requireSize === errorSize
