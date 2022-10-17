@@ -63,13 +63,13 @@ const inputFields = [
     step: "1",
     max: "20",
     label: "range",
-    require: true,
+    require: false,
   },
   {
     name: "is_admin",
     type: "checkbox",
     label: "Is admin",
-    require: true,
+    require: false,
   },
 ];
 

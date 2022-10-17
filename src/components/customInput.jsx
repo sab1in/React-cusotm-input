@@ -52,7 +52,9 @@ export const Input = ({
         placeholder={placeholder}
       />
       {error && (
-        <p className="custom-error mt-1 text-sm text-red-600">{error[name]}</p>
+        <p className="custom-error mt-1 text-sm text-red-600">
+          {error[name] === true && "invalid data"}
+        </p>
       )}
     </div>
   );
@@ -71,7 +73,9 @@ export const FileInput = ({ name, setInput, fileType, error, require }) => {
         type="file"
       />
       {error && (
-        <p className="custom-error mt-1 text-sm text-red-600">{error[name]}</p>
+        <p className="custom-error mt-1 text-sm text-red-600">
+          {error[name] === true && "invalid data"}
+        </p>
       )}
     </div>
   );
@@ -89,7 +93,9 @@ export const Checkbox = ({ name, label, value, setInput, error, require }) => {
       />
       <label className="ml-2 text-sm font-medium text-gray-900">{label}</label>
       {error && (
-        <p className="custom-error mt-1 text-sm text-red-600">{error[name]}</p>
+        <p className="custom-error mt-1 text-sm text-red-600">
+          {error[name] === true && "invalid data"}
+        </p>
       )}
     </div>
   );
@@ -127,7 +133,9 @@ export const Select = ({
         })}
       </select>
       {error && (
-        <p className="custom-error mt-1 text-sm text-red-600">{error[name]}</p>
+        <p className="custom-error mt-1 text-sm text-red-600">
+          {error[name] === true && "invalid data"}
+        </p>
       )}
     </div>
   );
@@ -163,7 +171,9 @@ export const Range = ({
         className="w-full text-blue-600 focus:outline-none cursor-pointer bg-gray-100 rounded border-gray-300 "
       />
       {error && (
-        <p className="custom-error mt-1 text-sm text-red-600">{error[name]}</p>
+        <p className="custom-error mt-1 text-sm text-red-600">
+          {error[name] === true && "invalid data"}
+        </p>
       )}
     </div>
   );
