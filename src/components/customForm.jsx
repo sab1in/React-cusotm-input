@@ -1,15 +1,9 @@
-import React, { useState } from "react";
-import useErrorValidity from "../hooks/useErrorValidity";
+import React from "react";
 import useSetInput from "../hooks/useSetInput";
-import Type from "../utils/InputType";
-import { Checkbox, Input, Range, Select, FileInput } from "./customInput";
+import RenderFromInputs from "./renderFormInputs";
 
-const CustomForm = ({ FormList, data, setData }) => {
-  const [errors, setErrors] = useState({});
-
-  const setInput = useSetInput(setData, setErrors);
-
-  const errorValidity = useErrorValidity();
+const CustomForm = ({ FormList, data, setData, className }) => {
+  const [errors, setInput, errorValidity] = useSetInput(setData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +17,7 @@ const CustomForm = ({ FormList, data, setData }) => {
       className="w-[95%] mx-auto rounded-lg border-separate border border-slate-200 shadow-md p-4 bg-slate-100"
       onSubmit={handleSubmit}
     >
-      <div className="grid gap-0 md:gap-6   md:grid-cols-2">
+      <div className={className}>
         <RenderFromInputs
           FormList={FormList}
           data={data}
@@ -40,29 +34,6 @@ const CustomForm = ({ FormList, data, setData }) => {
       </button>
     </form>
   );
-};
-
-const RenderFromInputs = ({ FormList, data, setInput, errors }) => {
-  return FormList.map((item, index) => {
-    const { name } = item;
-    const InputNames = {
-      Input,
-      Checkbox,
-      Select,
-      Range,
-      FileInput,
-    };
-    var FindInput = InputNames[Type(item.type)];
-    return (
-      <FindInput
-        key={index}
-        {...item}
-        error={errors[name]}
-        value={data[name]}
-        setInput={setInput}
-      />
-    );
-  });
 };
 
 export default CustomForm;

@@ -110,7 +110,12 @@ const App = () => {
   return (
     <React.Fragment>
       <div className="min-h-[100vh]  flex items-center">
-        <CustomForm FormList={inputFields} data={data} setData={setData} />
+        <CustomForm
+          FormList={inputFields}
+          data={data}
+          setData={setData}
+          className={"grid gap-0 md:gap-6 md:grid-cols-2"}
+        />
       </div>
       <div className="w-72 mx-auto my-10">
         <Input
