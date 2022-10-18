@@ -1,30 +1,15 @@
 import React, { useState } from "react";
+import useErrorValidity from "../hooks/useErrorValidity";
+import useSetInput from "../hooks/useSetInput";
+import Type from "../utils/InputType";
 import { Checkbox, Input, Range, Select, FileInput } from "./customInput";
 
 const CustomForm = ({ FormList, data, setData }) => {
   const [errors, setErrors] = useState({});
 
-  const setInput = (key, value, error) => {
-    setData((pre) => {
-      return {
-        ...pre,
-        [key]: value,
-      };
-    });
-    setErrors((pre) => {
-      return {
-        ...pre,
-        [key]: error,
-      };
-    });
-  };
+  const setInput = useSetInput(setData, setErrors);
 
-  const errorValidity = (error, FormList) => {
-    const required = FormList.filter((e) => e.require).map((e) => e.name);
-    const has_fields = required.every((e) => e in errors);
-
-    return has_fields && Object.values(error).every((x) => x === false);
-  };
+  const errorValidity = useErrorValidity();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,17 +43,6 @@ const CustomForm = ({ FormList, data, setData }) => {
 };
 
 const RenderFromInputs = ({ FormList, data, setInput, errors }) => {
-  const Type = (type) => {
-    return type === "file"
-      ? "FileInput"
-      : type === "checkbox"
-      ? "Checkbox"
-      : type === "select"
-      ? "Select"
-      : type === "range"
-      ? "Range"
-      : "Input";
-  };
   return FormList.map((item, index) => {
     const { name } = item;
     const InputNames = {
