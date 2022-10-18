@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import CustomForm from "./components/customForm";
 import { Input } from "./components/customInput";
+import RenderFromInputs from "./components/renderFormInputs";
 
 // for multiple input
 const inputFields = [
@@ -118,11 +119,14 @@ const App = () => {
         />
       </div>
       <div className="w-72 mx-auto my-10">
-        <Input
+        <RenderFromInputs
           {...single_Input}
-          value={singleInput.email}
-          error={singleInputError}
+          data={singleInput?.email}
           setInput={setInput}
+          error={singleInputError}
+          containerCss=""
+          inputCss=""
+          labelCss="font-bold"
         />
       </div>
     </React.Fragment>

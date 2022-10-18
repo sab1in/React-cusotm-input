@@ -34,19 +34,26 @@ export const Input = ({
   setInput,
   error,
   require,
+  containerCss,
+  inputCss,
+  labelCss,
 }) => {
   return (
-    <div className="w-full mb-2">
+    <div className={containerCss ? containerCss : "w-full mb-2"}>
       <label
         htmlFor={name}
-        className={` block mb-2 text-sm font-medium text-gray-900`}
+        className={
+          labelCss ? labelCss : ` block mb-2 text-sm font-medium text-gray-900`
+        }
       >
         {label}
       </label>
       <input
         id={name}
         className={
-          "py-2 px-4 bg-gray-50 border border-gray-300 self-start transition duration-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          inputCss
+            ? inputCss
+            : "py-2 px-4 bg-gray-50 border border-gray-300 self-start transition duration-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         }
         // required
         name={name}
@@ -73,16 +80,27 @@ export const FileInput = ({
   type,
   error,
   require,
+  containerCss,
+  inputCss,
+  labelCss,
 }) => {
   return (
-    <div>
-      <label className="block mb-2 text-sm font-medium text-gray-900 ">
+    <div className={containerCss ? containerCss : ""}>
+      <label
+        className={
+          labelCss ? labelCss : "block mb-2 text-sm font-medium text-gray-900 "
+        }
+      >
         {label}
       </label>
       <input
         name={name}
         onChange={(e) => onChange(e, setInput, type, require, fileType)}
-        className="block w-full text-sm text-gray-900 bg-gray-50 rounded py-1 px-3 border border-gray-300 cursor-pointer  focus:outline-none "
+        className={
+          inputCss
+            ? inputCss
+            : "block w-full text-sm text-gray-900 bg-gray-50 rounded py-1 px-3 border border-gray-300 cursor-pointer  focus:outline-none "
+        }
         type="file"
       />
       {error && (
@@ -102,18 +120,30 @@ export const Checkbox = ({
   type,
   error,
   require,
+  containerCss,
+  inputCss,
+  labelCss,
 }) => {
   return (
-    <div className="flex mb-2 items-center">
+    <div className={containerCss ? containerCss : "flex mb-2 items-center"}>
       <input
         id={name}
         checked={value}
         type="checkbox"
         name={name}
         onChange={(e) => onChange(e, setInput, type, require)}
-        className="w-4 h-4 text-blue-600 focus:outline-none cursor-pointer float-left bg-gray-100 rounded border-gray-300 "
+        className={
+          inputCss
+            ? inputCss
+            : "w-4 h-4 text-blue-600 focus:outline-none cursor-pointer float-left bg-gray-100 rounded border-gray-300 "
+        }
       />
-      <label htmlFor={name} className="ml-2 text-sm font-medium text-gray-900">
+      <label
+        htmlFor={name}
+        className={
+          labelCss ? labelCss : "ml-2 text-sm font-medium text-gray-900"
+        }
+      >
         {label}
       </label>
       {error && (
@@ -133,12 +163,21 @@ export const Select = ({
   setInput,
   error,
   require,
+  containerCss,
+  inputCss,
+  labelCss,
   value,
   type,
 }) => {
   return (
-    <div className="w-full mb-2">
-      <label className="custom-label block mb-2 text-sm font-medium text-gray-900">
+    <div className={containerCss ? containerCss : "w-full mb-2"}>
+      <label
+        className={
+          labelCss
+            ? labelCss
+            : "custom-label block mb-2 text-sm font-medium text-gray-900"
+        }
+      >
         {label}
       </label>
       <select
@@ -146,7 +185,11 @@ export const Select = ({
         value={value}
         // required={required}
         onChange={(e) => onChange(e, setInput, type, require)}
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+        className={
+          inputCss
+            ? inputCss
+            : "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+        }
       >
         <option hidden value="">
           {placeholder}
@@ -178,17 +221,23 @@ export const Range = ({
   setInput,
   error,
   require,
+  containerCss,
+  inputCss,
+  labelCss,
   type,
 }) => {
   return (
-    <div className="w-full mb-2 ">
+    <div className={containerCss ? containerCss : "w-full mb-2 "}>
       <label
-        htmlFor="checked-checkbox"
-        className="ml-2 text-sm font-medium text-gray-900"
+        htmlFor={name}
+        className={
+          labelCss ? labelCss : "ml-2 text-sm font-medium text-gray-900"
+        }
       >
         {label}
       </label>
       <input
+        id={name}
         value={value}
         type="range"
         name={name}
@@ -196,7 +245,11 @@ export const Range = ({
         max={max}
         step={step}
         onChange={(e) => onChange(e, setInput, type, require)}
-        className="w-full text-blue-600 focus:outline-none cursor-pointer bg-gray-100 rounded border-gray-300 "
+        className={
+          inputCss
+            ? inputCss
+            : "w-full text-blue-600 focus:outline-none cursor-pointer bg-gray-100 rounded border-gray-300 "
+        }
       />
       {error && (
         <p className="custom-error mt-1 text-sm text-red-600">
