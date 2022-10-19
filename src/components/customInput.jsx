@@ -1,5 +1,8 @@
 import React from "react";
 import OnChangeValidation from "../utils/validation/OnChangeValidation";
+import InputLabel from "./inputLabel";
+import InputError from "./inputError";
+import InputContainer from "../layout/inputContainer";
 
 const onChange = (e, setInput, type, require, fileType) => {
   const { value, name } = e.target;
@@ -39,15 +42,8 @@ export const Input = ({
   labelCss,
 }) => {
   return (
-    <div className={containerCss ? containerCss : "w-full mb-2"}>
-      <label
-        htmlFor={name}
-        className={
-          labelCss ? labelCss : ` block mb-2 text-sm font-medium text-gray-900`
-        }
-      >
-        {label}
-      </label>
+    <InputContainer containerCss={containerCss}>
+      <InputLabel label={label} labelCss={labelCss} />
       <input
         id={name}
         className={
@@ -63,12 +59,8 @@ export const Input = ({
         onChange={(e) => onChange(e, setInput, type, require)}
         placeholder={placeholder}
       />
-      {error && (
-        <p className="custom-error mt-1 text-sm text-red-600">
-          {error === true && "invalid data"}
-        </p>
-      )}
-    </div>
+      <InputError error={error} />
+    </InputContainer>
   );
 };
 
@@ -85,14 +77,8 @@ export const FileInput = ({
   labelCss,
 }) => {
   return (
-    <div className={containerCss ? containerCss : ""}>
-      <label
-        className={
-          labelCss ? labelCss : "block mb-2 text-sm font-medium text-gray-900 "
-        }
-      >
-        {label}
-      </label>
+    <InputContainer containerCss={containerCss}>
+      <InputLabel label={label} labelCss={labelCss} />
       <input
         name={name}
         onChange={(e) => onChange(e, setInput, type, require, fileType)}
@@ -103,12 +89,8 @@ export const FileInput = ({
         }
         type="file"
       />
-      {error && (
-        <p className="custom-error mt-1 text-sm text-red-600">
-          {error === true && "invalid data"}
-        </p>
-      )}
-    </div>
+      <InputError error={error} />
+    </InputContainer>
   );
 };
 
@@ -125,7 +107,7 @@ export const Checkbox = ({
   labelCss,
 }) => {
   return (
-    <div className={containerCss ? containerCss : "flex mb-2 items-center"}>
+    <InputContainer containerCss={containerCss}>
       <input
         id={name}
         checked={value}
@@ -138,20 +120,9 @@ export const Checkbox = ({
             : "w-4 h-4 text-blue-600 focus:outline-none cursor-pointer float-left bg-gray-100 rounded border-gray-300 "
         }
       />
-      <label
-        htmlFor={name}
-        className={
-          labelCss ? labelCss : "ml-2 text-sm font-medium text-gray-900"
-        }
-      >
-        {label}
-      </label>
-      {error && (
-        <p className="custom-error mt-1 text-sm text-red-600">
-          {error === true && "invalid data"}
-        </p>
-      )}
-    </div>
+      <InputLabel label={label} labelCss={labelCss} />
+      <InputError error={error} />
+    </InputContainer>
   );
 };
 
@@ -170,16 +141,8 @@ export const Select = ({
   type,
 }) => {
   return (
-    <div className={containerCss ? containerCss : "w-full mb-2"}>
-      <label
-        className={
-          labelCss
-            ? labelCss
-            : "custom-label block mb-2 text-sm font-medium text-gray-900"
-        }
-      >
-        {label}
-      </label>
+    <InputContainer containerCss={containerCss}>
+      <InputLabel label={label} labelCss={labelCss} />
       <select
         name={name}
         value={value}
@@ -202,12 +165,8 @@ export const Select = ({
           );
         })}
       </select>
-      {error && (
-        <p className="custom-error mt-1 text-sm text-red-600">
-          {error === true && "invalid data"}
-        </p>
-      )}
-    </div>
+      <InputError error={error} />
+    </InputContainer>
   );
 };
 
@@ -227,15 +186,8 @@ export const Range = ({
   type,
 }) => {
   return (
-    <div className={containerCss ? containerCss : "w-full mb-2 "}>
-      <label
-        htmlFor={name}
-        className={
-          labelCss ? labelCss : "ml-2 text-sm font-medium text-gray-900"
-        }
-      >
-        {label}
-      </label>
+    <InputContainer containerCss={containerCss}>
+      <InputLabel label={label} labelCss={labelCss} />
       <input
         id={name}
         value={value}
@@ -251,11 +203,7 @@ export const Range = ({
             : "w-full text-blue-600 focus:outline-none cursor-pointer bg-gray-100 rounded border-gray-300 "
         }
       />
-      {error && (
-        <p className="custom-error mt-1 text-sm text-red-600">
-          {error === true && "invalid data"}
-        </p>
-      )}
-    </div>
+      <InputError error={error} />
+    </InputContainer>
   );
 };
