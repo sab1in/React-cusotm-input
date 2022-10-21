@@ -1,12 +1,13 @@
 import React from "react";
 
+import useWindowWidth from "../../hooks/useWindowWIdth";
+
 import BarChartContainer from "../../layout/barChartContainer";
 import BarItem from "./barItem";
 import "../../asset/css/barChart.css";
 
 const BarChart = ({ barData, dividerNum = 10 }) => {
-  // const [labelTransform,setLabelTransform] = useState(false)
-
+  const [width] = useWindowWidth();
   const barItemWidth = 100 / barData.length;
 
   const maxVal = Math.max(...barData.map((i) => i.value));
@@ -19,6 +20,7 @@ const BarChart = ({ barData, dividerNum = 10 }) => {
             <BarItem
               key={index}
               {...item}
+              windowWidth={width}
               barItemHeight={barItemHeight}
               barItemWidth={barItemWidth}
             />

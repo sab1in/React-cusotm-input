@@ -1,21 +1,27 @@
-import { useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
-import useWindowWidth from "../../hooks/useWindowWIdth";
 import ToolTip from "../toolTip/toolTip";
 
-const BarItem = ({ barItemHeight, barItemWidth, label, color, value }) => {
+const BarItem = ({
+  barItemHeight,
+  barItemWidth,
+  label,
+  color,
+  value,
+  windowWidth,
+}) => {
   const labelDiv = useRef(null);
-  const [width] = useWindowWidth();
+  const [labelRotate, setLabelRotate] = useState(false);
 
   useEffect(() => {
     if (labelDiv?.current?.scrollWidth > labelDiv?.current?.clientWidth) {
-      labelDiv.current.style.transform = "rotate(30deg)";
+      setLabelRotate(true);
     } else if (
       labelDiv?.current?.scrollWidth <= labelDiv?.current?.clientWidth
     ) {
-      labelDiv.current.style.transform = "none";
+      setLabelRotate(false);
     }
-  }, [width]);
+  }, [windowWidth]);
   return (
     <div
       style={{
@@ -30,7 +36,11 @@ const BarItem = ({ barItemHeight, barItemWidth, label, color, value }) => {
           }}
           className="bar-item"
         >
-          <div ref={labelDiv} className="bar-item-label">
+          <div
+            ref={labelDiv}
+            style={{ transform: labelRotate ? "rotate(30deg)" : "none" }}
+            className="bar-item-label"
+          >
             {label}
           </div>
         </div>
