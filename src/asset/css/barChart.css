@@ -1,0 +1,36 @@
+
+
+.bar-item{
+    background-color: #EF4444; 
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.bar-item-label{
+    position: absolute; 
+    top: 100%; 
+    text-align: center; 
+    width: 100%; 
+}
+
+.bar-rank{
+    position: absolute; 
+    right: 100%;
+}
+
+.bar-rank-div{
+    display: flex; 
+    align-items: flex-end; 
+}
+
+.bar-rank-dash{
+    background-color: #000000; 
+    width: 0.5rem; 
+    height: 1px;
+}
+
+.bar-rank-number{
+    position: relative; 
+    top: 12px;
+}

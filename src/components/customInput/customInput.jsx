@@ -1,8 +1,8 @@
 import React from "react";
-import OnChangeValidation from "../utils/validation/OnChangeValidation";
+import OnChangeValidation from "../../utils/validation/OnChangeValidation";
 import InputLabel from "./inputLabel";
 import InputError from "./inputError";
-import InputContainer from "../layout/inputContainer";
+import InputContainer from "../../layout/inputContainer";
 
 const onChange = (e, setInput, type, require, fileType) => {
   const { value, name } = e.target;

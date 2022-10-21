@@ -1,4 +1,4 @@
-import Type from "../utils/InputType";
+import Type from "../../utils/InputType";
 import { Checkbox, Input, Range, Select, FileInput } from "./customInput";
 
 const RenderFromInputs = ({

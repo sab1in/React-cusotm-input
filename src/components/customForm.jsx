@@ -1,6 +1,6 @@
 import React from "react";
 import useSetInput from "../hooks/useSetInput";
-import RenderFromInputs from "./renderFormInputs";
+import RenderFromInputs from "./customInput/renderFormInputs";
 
 const CustomForm = ({ FormList, data, setData }) => {
   const [errors, setInput, errorValidity] = useSetInput(setData);
