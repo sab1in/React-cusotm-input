@@ -1,5 +1,3 @@
-
-
 .bar-item{
     background-color: #EF4444; 
     position: relative;
@@ -10,7 +8,7 @@
 .bar-item-label{
     position: absolute; 
     top: 100%; 
-    text-align: center; 
+    text-align: center;
     width: 100%; 
 }
 

@@ -33,7 +33,7 @@ const App = () => {
 
   return (
     <React.Fragment>
-      <div className="mt-20">
+      <div className="mt-20 w-[90%] h-[80vh] m-auto">
         <BarChart barData={barData} dividerNum={10} />
       </div>
 

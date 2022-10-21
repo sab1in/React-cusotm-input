@@ -9,7 +9,7 @@ const BarItem = ({ barItemHeight, barItemWidth, label, color, value }) => {
 
   useEffect(() => {
     if (labelDiv?.current?.scrollWidth > labelDiv?.current?.clientWidth) {
-      labelDiv.current.style.transform = "rotate(90deg)";
+      labelDiv.current.style.transform = "rotate(30deg)";
     } else if (
       labelDiv?.current?.scrollWidth <= labelDiv?.current?.clientWidth
     ) {

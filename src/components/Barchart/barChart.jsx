@@ -5,6 +5,8 @@ import BarItem from "./barItem";
 import "../../asset/css/barChart.css";
 
 const BarChart = ({ barData, dividerNum = 10 }) => {
+  // const [labelTransform,setLabelTransform] = useState(false)
+
   const barItemWidth = 100 / barData.length;
 
   const maxVal = Math.max(...barData.map((i) => i.value));
