@@ -5,13 +5,6 @@
     width: 100%;
 }
 
-.bar-item-label{
-    position: absolute; 
-    top: 100%; 
-    text-align: center;
-    width: 100%; 
-}
-
 .bar-rank{
     position: absolute; 
     right: 100%;
@@ -31,4 +24,11 @@
 .bar-rank-number{
     position: relative; 
     top: 12px;
+}
+
+.label-wrapper{
+    position: absolute;
+    top: 100%;
+    display: flex;
+    width: 100%;
 }

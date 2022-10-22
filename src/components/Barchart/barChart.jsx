@@ -4,11 +4,17 @@ import useWindowWidth from "../../hooks/useWindowWIdth";
 
 import BarChartContainer from "../../layout/barChartContainer";
 import BarItem from "./barItem";
+import BarLabel from "./barLabel";
 import "../../asset/css/barChart.css";
 
-const BarChart = ({ barData, dividerNum = 10 }) => {
+const itemWidth = (data) => {
+  return 100 / data.length;
+};
+
+const BarChart = ({ barData, barLabel, dividerNum = 10 }) => {
   const [width] = useWindowWidth();
-  const barItemWidth = 100 / barData.length;
+  const barItemWidth = itemWidth(barData);
+  const labelItemWidth = itemWidth(barLabel);
 
   const maxVal = Math.max(...barData.map((i) => i.value));
   return (
@@ -26,6 +32,18 @@ const BarChart = ({ barData, dividerNum = 10 }) => {
             />
           );
         })}
+        <div className="label-wrapper">
+          {barLabel.map((item, index) => {
+            return (
+              <BarLabel
+                key={index}
+                width={labelItemWidth}
+                label={item}
+                windowWidth={width}
+              />
+            );
+          })}
+        </div>
         <RenderValueCount maxVal={maxVal} dividerNum={dividerNum} />
       </BarChartContainer>
     </React.Fragment>

@@ -6,7 +6,7 @@ import CustomForm from "./components/customForm";
 import RenderFromInputs from "./components/customInput/renderFormInputs";
 
 import { inputFields, single_Input } from "./utils/data/inputFields";
-import { barData } from "./utils/data/barData";
+import { barData, label } from "./utils/data/barData";
 
 const App = () => {
   // for multiple input
@@ -34,7 +34,7 @@ const App = () => {
   return (
     <React.Fragment>
       <div className="mt-20 w-[90%] h-[80vh] m-auto">
-        <BarChart barData={barData} dividerNum={10} />
+        <BarChart barData={barData} barLabel={label} dividerNum={10} />
       </div>
 
       <div className=" mt-20  flex items-center">
